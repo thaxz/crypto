@@ -11,6 +11,7 @@
 		E97CD149296372D200764A71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CD148296372D200764A71 /* ContentView.swift */; };
 		E97CD14B296372D300764A71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E97CD14A296372D300764A71 /* Assets.xcassets */; };
 		E97CD14E296372D300764A71 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E97CD14D296372D300764A71 /* Preview Assets.xcassets */; };
+		E97CD1562963757000764A71 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CD1552963757000764A71 /* Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		E97CD148296372D200764A71 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E97CD14A296372D300764A71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E97CD14D296372D300764A71 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E97CD1552963757000764A71 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 				E97CD146296372D200764A71 /* CryptoApp.swift */,
 				E97CD148296372D200764A71 /* ContentView.swift */,
 				E97CD14A296372D300764A71 /* Assets.xcassets */,
+				E97CD1542963754E00764A71 /* Extensions */,
 				E97CD14C296372D300764A71 /* Preview Content */,
 			);
 			path = Crypto;
@@ -65,6 +68,14 @@
 				E97CD14D296372D300764A71 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E97CD1542963754E00764A71 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E97CD1552963757000764A71 /* Color.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +150,7 @@
 			files = (
 				E97CD149296372D200764A71 /* ContentView.swift in Sources */,
 				E97CD147296372D200764A71 /* CryptoApp.swift in Sources */,
+				E97CD1562963757000764A71 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
