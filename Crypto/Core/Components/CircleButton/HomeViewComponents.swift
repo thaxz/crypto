@@ -41,6 +41,39 @@ extension HomeView {
         .padding(.horizontal)
     }
     
+    var allCoinsList: some View{
+        List{
+            ForEach(homeViewModel.allCoins) { coin in
+                CoinRowView(coin: coin, showHoldingsColumn: false)
+                // arrumando o padding
+                    .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+            }
+        }.listStyle(PlainListStyle())
+    }
     
+    var portfolioCoinsList: some View{
+        List{
+            ForEach(homeViewModel.portifolioCoins) { coin in
+                CoinRowView(coin: coin, showHoldingsColumn: true)
+                // arrumando o padding
+                    .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+            }
+        }.listStyle(PlainListStyle())
+    }
+    
+    var columnTitles: some View {
+        HStack{
+            Text("Coin")
+            Spacer()
+            if showPortfolio {
+                Text("Holdings")
+            }
+            Text("Price")
+                .frame(width: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
+        }
+        .font(.caption)
+        .foregroundColor(Color.theme.secondaryText)
+        .padding(.horizontal)
+    }
     
 }

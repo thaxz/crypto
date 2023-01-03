@@ -20,6 +20,7 @@
 		E97CD16D2963977300764A71 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CD16C2963977300764A71 /* PreviewProvider.swift */; };
 		E97CD16F2963A06C00764A71 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CD16E2963A06C00764A71 /* Double.swift */; };
 		E97CD1712963AABC00764A71 /* CoinRowComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CD1702963AABC00764A71 /* CoinRowComponents.swift */; };
+		E97CD1732963B20500764A71 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CD1722963B20500764A71 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		E97CD16C2963977300764A71 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		E97CD16E2963A06C00764A71 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		E97CD1702963AABC00764A71 /* CoinRowComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRowComponents.swift; sourceTree = "<group>"; };
+		E97CD1722963B20500764A71 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 		E97CD15A296378E100764A71 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				E97CD1722963B20500764A71 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				E97CD1712963AABC00764A71 /* CoinRowComponents.swift in Sources */,
 				E97CD1562963757000764A71 /* Color.swift in Sources */,
 				E97CD16329637F4F00764A71 /* CircleButtonAnimationView.swift in Sources */,
+				E97CD1732963B20500764A71 /* HomeViewModel.swift in Sources */,
 				E97CD166296381C700764A71 /* HomeViewComponents.swift in Sources */,
 				E97CD16D2963977300764A71 /* PreviewProvider.swift in Sources */,
 				E97CD16F2963A06C00764A71 /* Double.swift in Sources */,

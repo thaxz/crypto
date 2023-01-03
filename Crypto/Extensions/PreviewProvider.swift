@@ -23,6 +23,10 @@ class DeveloperPreview {
     static let shared = DeveloperPreview()
     private init() {}
     
+    // para usar o viewModel
+    
+    let homeVM = HomeViewModel()
+    
     // preenchendo uma coin para usarmos nas previews de forma fácil
     
     let coin = CoinModel(
