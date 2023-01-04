@@ -16,14 +16,15 @@ class CoinImageService{
     private var imageSubscription: AnyCancellable?
     private let coin: CoinModel
     
+    // Inicializando pedindo a coin
     init(coin: CoinModel){
         self.coin = coin
         getCoinImage()
     }
     
     private func getCoinImage(){
+        // pegando a url da coin
         guard let url = URL(string: coin.image) else {return}
-        
         // pegando a url usando o método combine
         imageSubscription = NetworkingManager.download(url: url)
         // Transformando
@@ -38,7 +39,5 @@ class CoinImageService{
                 self?.imageSubscription?.cancel()
             })
     }
-    
-    
     
 }

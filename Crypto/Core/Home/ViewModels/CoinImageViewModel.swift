@@ -29,7 +29,7 @@ class CoinImageViewModel: ObservableObject {
         self.isLoading = true
     }
     
-    // Pegando a imagem se inscrevendo para o publisher dela
+    // Pegando a imagem atualizada ao se inscrever no publisher dela
     private func addSubscribers(){
         dataService.$image
             .sink { [weak self] (_) in

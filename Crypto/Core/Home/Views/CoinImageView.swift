@@ -7,10 +7,12 @@
 
 import SwiftUI
 
-
 struct CoinImageView: View {
     
     @StateObject var coinImageViewModel: CoinImageViewModel
+    
+    // incializando o stateObject e pedindo pra ele ser preenchido com a coin
+    // que passarmos quando inicializarmos essa classe
     
     init(coin: CoinModel){
         _coinImageViewModel = StateObject(wrappedValue: CoinImageViewModel(coin: coin))
