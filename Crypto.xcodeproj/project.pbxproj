@@ -22,6 +22,7 @@
 		E97CD1712963AABC00764A71 /* CoinRowComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CD1702963AABC00764A71 /* CoinRowComponents.swift */; };
 		E97CD1732963B20500764A71 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97CD1722963B20500764A71 /* HomeViewModel.swift */; };
 		E9A5644D2965E930007B3859 /* CoinDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A5644C2965E930007B3859 /* CoinDataService.swift */; };
+		E9A564502965F2B6007B3859 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A5644F2965F2B6007B3859 /* NetworkingManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		E97CD1702963AABC00764A71 /* CoinRowComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRowComponents.swift; sourceTree = "<group>"; };
 		E97CD1722963B20500764A71 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		E9A5644C2965E930007B3859 /* CoinDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDataService.swift; sourceTree = "<group>"; };
+		E9A5644F2965F2B6007B3859 /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				E97CD1672963842C00764A71 /* Models */,
 				E97CD157296378B500764A71 /* Core */,
 				E97CD1542963754E00764A71 /* Extensions */,
+				E9A5644E2965F288007B3859 /* Utilities */,
 				E9A5644B2965E90D007B3859 /* Services */,
 				E97CD14A296372D300764A71 /* Assets.xcassets */,
 				E97CD14C296372D300764A71 /* Preview Content */,
@@ -172,6 +175,14 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		E9A5644E2965F288007B3859 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				E9A5644F2965F2B6007B3859 /* NetworkingManager.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -255,6 +266,7 @@
 				E97CD16D2963977300764A71 /* PreviewProvider.swift in Sources */,
 				E97CD16F2963A06C00764A71 /* Double.swift in Sources */,
 				E97CD1692963846700764A71 /* CoinModel.swift in Sources */,
+				E9A564502965F2B6007B3859 /* NetworkingManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
