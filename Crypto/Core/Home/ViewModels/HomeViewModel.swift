@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 
 class HomeViewModel: ObservableObject {
@@ -20,15 +21,22 @@ class HomeViewModel: ObservableObject {
     // Moedas que o user tem
     @Published var portifolioCoins: [CoinModel] = []
     
-    // Fingindo que to baixando da internet
+    // Chamando a classe que tá baixando a data
+    private let dataService = CoinDataService()
+    // criando o lugar para storar
+    private var cancellabes = Set<AnyCancellable>()
+    
     init(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.allCoins.append(DeveloperPreview.shared.coin)
-            self.portifolioCoins.append(DeveloperPreview.shared.coin)
-        }
-        
-        
-        
+      addSubscribers()
+    }
+    
+    // Pegando a data atualizada e passando para cá
+    func addSubscribers(){
+        dataService.$allCoins
+            .sink { [weak self] (returnedCoins) in
+                self?.allCoins = returnedCoins
+            }
+            .store(in: &cancellabes)
     }
     
     
