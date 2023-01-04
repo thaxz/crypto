@@ -22,6 +22,8 @@ struct HomeView: View {
             VStack{
                 homeHeader
                 
+                SearchBarView(searchText: $homeViewModel.searchText)
+                
                 columnTitles
                 
                 // se estiver falso, mostrar a lista com todas moedas
