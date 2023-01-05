@@ -27,6 +27,10 @@ class DeveloperPreview {
     
     let homeVM = HomeViewModel()
     
+    // preenchendo uma statistics
+    let stat1 = StatisticsModel(title: "Market cap", value: "$12.07Bn", percentageChange: 25.34)
+    let stat2 = StatisticsModel(title: "Total value", value: "$13.12Tr")
+    
     // preenchendo uma coin para usarmos nas previews de forma fácil
     
     let coin = CoinModel(
