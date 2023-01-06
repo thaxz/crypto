@@ -37,7 +37,7 @@ class CoinImageService{
         } else {
             // se já não estiver baixada
             downloadCoinImage()
-            print("Downloading image now")
+            //print("Downloading image now")
         }
     }
     

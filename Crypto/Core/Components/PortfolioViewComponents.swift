@@ -21,7 +21,7 @@ extension PortfolioView{
                         .padding(4)
                         .onTapGesture {
                             withAnimation(.easeIn){
-                                selectedCoin = coin
+                                updateSelectedCoin(coin: coin)
                             }
                         }
                         .background(
@@ -63,49 +63,13 @@ extension PortfolioView{
             .font(.headline)
     }
     
-    // Func to get the current value
-    func getCurrentValue()-> Double{
-        // se conseguir converter para double
-        if let quantity = Double(quantityText){
-            return quantity * (selectedCoin?.currentPrice ?? 0)
-        }
-        return 0
-    }
-    
-    // Func to save value
-    func saveButtonPressed(){
-        // verificando se temos uma moeda
-        guard let coin = selectedCoin else {return}
-        // salvando para o portfolio
-        
-        // mostrando o botão
-        withAnimation(.easeIn){
-            showCheckmark = true
-            removeSelectedCoin()
-        }
-        // escondendo o teclado
-        UIApplication.shared.endEditing()
-        // escondendo o botão
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
-            withAnimation(.easeIn){
-                showCheckmark = false
-            }
-        }
-    }
-    
-    // Func to reset selected coin
-    func removeSelectedCoin(){
-        selectedCoin = nil
-        homeViewModel.searchText = ""
-    }
-    
     // toolbar trailing icon
     var trailingNavBarButtons: some View {
         HStack(spacing: 10){
             Image(systemName: "checkmark")
                 .opacity(showCheckmark ? 1 : 0)
             Button {
-                
+                saveButtonPressed()
             } label: {
                 Text("SAVE")
             }
