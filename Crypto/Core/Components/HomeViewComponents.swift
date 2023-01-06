@@ -15,6 +15,14 @@ extension HomeView {
         HStack{
             CircleButtonView(iconName: showPortfolio ? "plus" : "info")
                 .animation(.none)
+                // Para ir para a view correspondente da tela que está
+                .onTapGesture {
+                    // se estiver na de portfolio
+                    if showPortfolio {
+                        // mudando o valor para aparecer a sheet
+                        showPortfolioView.toggle()
+                    }
+                }
                 .background(
                     //colocando animação binding com showPortfolio
                     CircleButtonAnimationView(animate: $showPortfolio)
@@ -40,7 +48,8 @@ extension HomeView {
         }
         .padding(.horizontal)
     }
-    
+   
+    // all coins list component
     var allCoinsList: some View{
         List{
             ForEach(homeViewModel.allCoins) { coin in
@@ -50,7 +59,7 @@ extension HomeView {
             }
         }.listStyle(PlainListStyle())
     }
-    
+    // portfolio coins list component
     var portfolioCoinsList: some View{
         List{
             ForEach(homeViewModel.portifolioCoins) { coin in
@@ -60,7 +69,7 @@ extension HomeView {
             }
         }.listStyle(PlainListStyle())
     }
-    
+    // titles de cada coluna
     var columnTitles: some View {
         HStack{
             Text("Coin")

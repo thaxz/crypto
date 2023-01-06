@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CoinRowView: View {
-    
+    // View da lista das moedas
     let coin: CoinModel
     // se deve apaerecer a coluna do meio
     let showHoldingsColumn: Bool

@@ -9,8 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
     
-    // ir para a página de portfólio
+    // ir para a página de portfólio (animar p/ o lado)
     @State var showPortfolio: Bool = false
+    // quando a view de portfolio vai aparecer (nova sheet)
+    @State var showPortfolioView: Bool = false
     // acessando a viewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
     
@@ -18,16 +20,21 @@ struct HomeView: View {
         ZStack{
             Color.theme.background
                 .ignoresSafeArea()
+            // Sheet do portfolio
+                .sheet(isPresented: $showPortfolioView) {
+                    PortfolioView()
+                        .environmentObject(homeViewModel)
+                }
             
             VStack{
                 homeHeader
-                
+                // estatísticas
                 HomeStatsView(showPortfolio: $showPortfolio)
-                
+                // searchBar
                 SearchBarView(searchText: $homeViewModel.searchText)
-                
+                // nomes em cima das colunas
                 columnTitles
-                
+        
                 // se estiver falso, mostrar a lista com todas moedas
                 if !showPortfolio {
                     allCoinsList

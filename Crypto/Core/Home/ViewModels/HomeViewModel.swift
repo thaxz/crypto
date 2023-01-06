@@ -8,13 +8,11 @@
 import Foundation
 import Combine
 
-
+/*
+como essa viewModel (as moedas) vão ser usadas em vários lugares
+vou colocar no enviroment, para ser acessada de qlr lugar fácil
+*/
 class HomeViewModel: ObservableObject {
-    
-    /*
-    como essa viewModel (as moedas) vão ser usadas em vários lugares
-    vou colocar no enviroment, para ser acessada de qlr lugar fácil
-    */
     
     // estatísticas
     @Published var statistcs: [StatisticsModel] = []
@@ -26,7 +24,7 @@ class HomeViewModel: ObservableObject {
     // para pegar o texto do textfield
     @Published var searchText: String = ""
     
-    // Chamando a classe que tá baixando a data
+    // Chamando a classe que tá baixando as datas para atualizar os publishers
     private let coinDataService = CoinDataService()
     private let marketDataService = MarketDataService()
     // criando o lugar para storar
@@ -36,7 +34,7 @@ class HomeViewModel: ObservableObject {
       addSubscribers()
     }
     
-    // Pegando a data atualizada e passando para cá
+    // Pegando as datas atualizada e passando para cá
     func addSubscribers(){
         // me inscrevendo para receber updates do que está sendo colocado no textField
         $searchText

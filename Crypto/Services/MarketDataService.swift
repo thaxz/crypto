@@ -18,8 +18,7 @@ class MarketDataService {
     init() {
         getData()
     }
-    
-    
+    // pegando as informações da api
     func getData(){
         guard let url = URL(string: "https://api.coingecko.com/api/v3/global") else {return}
         // pegando a url usando o método combine e usando o networking manager
@@ -34,5 +33,4 @@ class MarketDataService {
                 self?.marketDataSubscription?.cancel()
             })
     }
-    
 }
