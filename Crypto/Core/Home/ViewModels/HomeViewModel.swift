@@ -23,6 +23,8 @@ class HomeViewModel: ObservableObject {
     @Published var portifolioCoins: [CoinModel] = []
     // para pegar o texto do textfield
     @Published var searchText: String = ""
+    // Se a terra estiver carregando
+    @Published var isLoading: Bool = false
     
     // Chamando as classes que estão atualizando os publishers
     private let coinDataService = CoinDataService()
@@ -37,6 +39,7 @@ class HomeViewModel: ObservableObject {
     
     // Pegando as datas atualizadas e passando para cá
     func addAllSubscribers(){
+        isLoading = true
         addAllCoinsSubscriber()
         addMarketDataSubscriber()
         addPortfolioSubscriber()
@@ -62,12 +65,16 @@ class HomeViewModel: ObservableObject {
     func addMarketDataSubscriber(){
         // cadastrando no outro subscriber que pega marketData
         marketDataService.$marketData
+        // combinando com o do portfolio, para ter o valor atualizado
+            .combineLatest($portifolioCoins)
             .map(mapGlobalMarketData)
             .sink { [weak self] (returnedStats) in
                 self?.statistcs = returnedStats
+                self?.isLoading = false
             }
             .store(in: &cancellabes)
     }
+    
     // Se inscrevendo no subscriber de portfolio
     func addPortfolioSubscriber(){
         // cadastrando no subscriber de portfolio
@@ -75,19 +82,7 @@ class HomeViewModel: ObservableObject {
         // mas combinando ele com as coins filtradas já, o outro subscriber
             .combineLatest(portfolioDataService.$savedEntities)
         // convertendo em um array de portfolioCoins
-            .map { (coinModels, porfolioEntities) -> [CoinModel] in
-                coinModels
-                // map compacto pq teremos optionals, as moedas que não serão usadas
-                    .compactMap { (coin) -> CoinModel? in
-                        // Se tiver no portfolio
-                        guard let entity = porfolioEntities.first(where: {$0.coinID == coin.id}) else {
-                            // se não tiver, retorna nulo.
-                            return nil
-                        }
-                        //se tiver, retorna ela com o amount atualizado
-                        return coin.updateHoldings(amount: entity.amount)
-                    }
-            }
+            .map(mapAllCoinsToPortfolioCoins)
             .sink { [weak self] (returnedCoins) in
                 self?.portifolioCoins = returnedCoins
             }
@@ -97,6 +92,13 @@ class HomeViewModel: ObservableObject {
     // Função para chamarmos na view e darmos update no coreData
     func updatePortfolio(coin: CoinModel, amount: Double){
         portfolioDataService.updatePortfolio(coin: coin, amount: amount)
+    }
+    
+    // Função para dar reload na data
+    func reloadData(){
+        coinDataService.getCoins()
+        marketDataService.getData()
+        HapticManager.notification(type: .success)
     }
     
     // Função para filtrar usando a searchBar
@@ -111,16 +113,49 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    // Função para transformar as moedas em portfolioCoins e salvar no coreData
+    func mapAllCoinsToPortfolioCoins(allCoins: [CoinModel], porfolioEntities: [PortfolioEntity]) -> [CoinModel]{
+        allCoins
+        // map compacto pq teremos optionals, as moedas que não serão usadas
+            .compactMap { (coin) -> CoinModel? in
+                // Se tiver no portfolio
+                guard let entity = porfolioEntities.first(where: {$0.coinID == coin.id}) else {
+                    // se não tiver, retorna nulo.
+                    return nil
+                }
+                //se tiver, retorna ela com o amount atualizado
+                return coin.updateHoldings(amount: entity.amount)
+            }
+    }
+    
     // Função para fazer o map do globalMarketData
-    private func mapGlobalMarketData(marketDataModel: MarketDataModel?) -> [StatisticsModel] {
+    private func mapGlobalMarketData(marketDataModel: MarketDataModel?, portfolioCoins: [CoinModel]) -> [StatisticsModel] {
         var stats: [StatisticsModel] = []
         // vendo se tem data
         guard let data = marketDataModel else {return stats}
+        
         // se tiver, convertendo e preenchendo
         let marketCap = StatisticsModel(title: "Market Cap", value: data.marketCap, percentageChange: data.marketCapChangePercentage24HUsd)
         let volume = StatisticsModel(title: "24h Volume", value: data.volume)
         let btcDominance = StatisticsModel(title: "BTC Dominance", value: data.btcDominance)
-        let portfolio = StatisticsModel(title: "Portfolio Value", value: "$0.00", percentageChange: 0)
+        
+        // pegando o valor que temos no portfolio e somando todos
+        let portfolioValue =
+        portfolioCoins
+            .map({$0.currentHoldingsValue})
+            .reduce(0, +)
+        
+        // calculando a % que as moedas do portfolio subiram
+        let previousValue = portfolioCoins.map { (coin) -> Double in
+            let currentValue = coin.currentHoldingsValue
+            let percentChange = coin.priceChangePercentage24H ?? 0 / 100
+            let previousValue = currentValue / (1 + percentChange)
+            return previousValue
+        } .reduce(0, +)
+        
+        let percentageChange = ((portfolioValue - previousValue) / previousValue) * 100
+            
+        let portfolio = StatisticsModel(title: "Portfolio Value", value: portfolioValue.asCurrencyWith2Decimals(), percentageChange: percentageChange)
         
         stats.append(contentsOf: [marketCap, volume, btcDominance, portfolio])
         return stats
