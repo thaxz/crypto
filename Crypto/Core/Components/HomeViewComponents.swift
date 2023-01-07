@@ -53,9 +53,13 @@ extension HomeView {
     var allCoinsList: some View{
         List{
             ForEach(homeViewModel.allCoins) { coin in
+                // Para cada moeda nessa lista, preenche a row e leva para a tela de detalhe
                 CoinRowView(coin: coin, showHoldingsColumn: false)
                 // arrumando o padding
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+                    .onTapGesture {
+                        segue(coin: coin)
+                    }
             }
         }.listStyle(PlainListStyle())
     }
@@ -66,6 +70,9 @@ extension HomeView {
                 CoinRowView(coin: coin, showHoldingsColumn: true)
                 // arrumando o padding
                     .listRowInsets(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+                    .onTapGesture {
+                        segue(coin: coin)
+                    }
             }
         }.listStyle(PlainListStyle())
     }

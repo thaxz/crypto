@@ -16,6 +16,10 @@ struct HomeView: View {
     // acessando a viewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
     
+    // para ir para a detailView
+    @State var selectedCoin: CoinModel? = nil
+    @State var showDetailView: Bool = false
+    
     var body: some View {
         ZStack{
             Color.theme.background
@@ -47,6 +51,18 @@ struct HomeView: View {
                 Spacer(minLength: 0)
             }
         }
+        .background(
+            NavigationLink(
+                            destination: DetailLoadingView(coin: $selectedCoin),
+                            isActive: $showDetailView,
+                            // não vamos clicar então empty
+                            label: { EmptyView() })
+        )
+    }
+    
+    func segue(coin: CoinModel){
+        selectedCoin = coin
+        showDetailView.toggle()
     }
 }
 
