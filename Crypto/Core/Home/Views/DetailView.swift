@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DetailLoadingView{
+struct DetailLoadingView: View{
     
     @Binding var coin: CoinModel?
     
@@ -22,15 +22,17 @@ struct DetailLoadingView{
 
 struct DetailView: View {
     
-    let coin: CoinModel
+    @StateObject var detailViewModel: DetailViewModel
     
     init(coin: CoinModel) {
-        self.coin = coin
+        // como para inicializar a VM precisa de uma coin, e aqui a coin está sendo criada ao mesmo tempo
+        // aqui estou inicializando a VM com a mesma coin do init
+        _detailViewModel = StateObject(wrappedValue: DetailViewModel(coin: coin))
         print("initializing detail view for \(coin.name)")
     }
     
     var body: some View {
-        Text(coin.name)
+        Text("Hello")
     }
 }
 
