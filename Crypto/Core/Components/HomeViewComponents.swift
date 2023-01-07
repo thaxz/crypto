@@ -71,14 +71,57 @@ extension HomeView {
     }
     // titles de cada coluna
     var columnTitles: some View {
+        // Stack do coin que quando clica ordena
         HStack{
-            Text("Coin")
-            Spacer()
-            if showPortfolio {
-                Text("Holdings")
+            HStack(spacing: 4){
+                Text("Coin")
+                Image(systemName: "chevron.down")
+                    .opacity((homeViewModel.sortOption == .rank || homeViewModel.sortOption == .rankReversed)  ? 1 : 0)
+                    .rotationEffect(Angle(degrees: homeViewModel.sortOption == .rank ? 0 : 180))
             }
-            Text("Price")
+            // quando tocar
+            .onTapGesture {
+                withAnimation(.default){
+                    // se estiver ordenado pelo um jeito, muda pro outro
+                    homeViewModel.sortOption = homeViewModel.sortOption == .rank ? .rankReversed : .rank
+                }
+            }
+            Spacer()
+            
+            // Stack dos holdings que quando clica ordena
+            if showPortfolio {
+                HStack(spacing: 4){
+                    Text("Holdings")
+                    Image(systemName: "chevron.down")
+                        .opacity((homeViewModel.sortOption == .holdings || homeViewModel.sortOption == .holdingsReversed)  ? 1 : 0)
+                        .rotationEffect(Angle(degrees: homeViewModel.sortOption == .holdings ? 0 : 180))
+                }
+                // quando tocar
+                .onTapGesture {
+                    withAnimation(.default){
+                        // se estiver ordenado pelo um jeito, muda pro outro
+                        homeViewModel.sortOption = homeViewModel.sortOption == .holdings ? .holdingsReversed : .holdings
+                    }
+                }
+            }
+            
+            // Stack do price que quando clica ordena
+            HStack(spacing: 4){
+                Text("Price")
+                Image(systemName: "chevron.down")
+                    .opacity((homeViewModel.sortOption == .price || homeViewModel.sortOption == .priceReversed)  ? 1 : 0)
+                    .rotationEffect(Angle(degrees: homeViewModel.sortOption == .price ? 0 : 180))
+            }
                 .frame(width: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
+            // quando tocar
+            .onTapGesture {
+                withAnimation(.default){
+                    // se estiver ordenado pelo um jeito, muda pro outro
+                    homeViewModel.sortOption = homeViewModel.sortOption == .price ? .priceReversed : .price
+                }
+            }
+            
+            // botão para atualizar os dados
             Button {
                 withAnimation(.linear(duration: 2.0)){
                     homeViewModel.reloadData()
@@ -86,7 +129,6 @@ extension HomeView {
             } label: {
                 Image(systemName: "gofoward")
             } .rotationEffect(Angle(degrees: homeViewModel.isLoading ? 360 : 0), anchor: .center)
-
         }
         .font(.caption)
         .foregroundColor(Color.theme.secondaryText)

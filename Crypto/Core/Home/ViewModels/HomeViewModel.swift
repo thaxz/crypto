@@ -25,6 +25,8 @@ class HomeViewModel: ObservableObject {
     @Published var searchText: String = ""
     // Se a terra estiver carregando
     @Published var isLoading: Bool = false
+    // Que tipo de sort o user vai escolher
+    @Published var sortOption: SortOption = .holdings
     
     // Chamando as classes que estão atualizando os publishers
     private let coinDataService = CoinDataService()
@@ -32,6 +34,11 @@ class HomeViewModel: ObservableObject {
     private let portfolioDataService = PortfolioDataService()
     // criando o lugar para storar
     private var cancellabes = Set<AnyCancellable>()
+    
+    // Enum para sort as informações
+    enum SortOption{
+        case rank, rankReversed, holdings, holdingsReversed, price, priceReversed
+    }
     
     init(){
       addAllSubscribers()
@@ -51,11 +58,11 @@ class HomeViewModel: ObservableObject {
         $searchText
         // me inscrevendo para receber updates do que está sendo colocado no textField
         // combinando dois subscribers para receber updates nos dois
-            .combineLatest(coinDataService.$allCoins)
+            .combineLatest(coinDataService.$allCoins, $sortOption)
         // colocando um delay para caso o user digite rápido
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
         // transformando o resultado em um array filtrado
-            .map(filterCoins)
+            .map(filterAndSortCoins)
             .sink { [weak self] (returnedCoins) in
                 self?.allCoins = returnedCoins
             }
@@ -84,7 +91,8 @@ class HomeViewModel: ObservableObject {
         // convertendo em um array de portfolioCoins
             .map(mapAllCoinsToPortfolioCoins)
             .sink { [weak self] (returnedCoins) in
-                self?.portifolioCoins = returnedCoins
+                guard let self = self else {return}
+                self.portifolioCoins = self.sortPortfolioCoinsIfNeedeed(coins: returnedCoins)
             }
             .store(in: &cancellabes)
     }
@@ -101,6 +109,15 @@ class HomeViewModel: ObservableObject {
         HapticManager.notification(type: .success)
     }
     
+    // Função para filtrar e ordenar
+    private func filterAndSortCoins(text: String, coins: [CoinModel], sort: SortOption) -> [CoinModel]{
+        // filtrando
+        var updatedCoins = filterCoins(text: text, coins: coins)
+        // ordenando
+        sortCoins(sort: sort, coins: &updatedCoins)
+        return updatedCoins
+    }
+    
     // Função para filtrar usando a searchBar
     private func filterCoins(text: String, coins: [CoinModel]) -> [CoinModel]{
         // se o txtfld estiver vazio, não precisa filtrar, só retorna
@@ -112,6 +129,33 @@ class HomeViewModel: ObservableObject {
             return coin.name.lowercased().contains(lowercasedText) || coin.symbol.lowercased().contains(lowercasedText) || coin.id.lowercased().contains(lowercasedText)
         }
     }
+    
+    // Filtrando as do portfolio (por holdings)
+    private func sortPortfolioCoinsIfNeedeed(coins: [CoinModel])-> [CoinModel]{
+        switch sortOption {
+        case .holdings:
+            return coins.sorted(by: {$0.currentHoldingsValue > $1.currentHoldingsValue})
+        case .holdingsReversed:
+            return coins.sorted(by: {$0.currentHoldingsValue < $1.currentHoldingsValue})
+        default:
+            return coins
+        }
+    }
+    
+    // Função para ordenar
+    private func sortCoins(sort: SortOption, coins: inout [CoinModel]){
+        switch sort {
+        case .rank, .holdings:
+             coins.sort(by: {$0.rank < $1.rank})
+        case .rankReversed, .holdingsReversed:
+             coins.sort(by: {$0.rank > $1.rank})
+        case .price:
+             coins.sort(by: {$0.currentPrice > $1.currentPrice})
+        case .priceReversed:
+             coins.sort(by: {$0.currentPrice < $1.currentPrice})
+            }
+        }
+    
     
     // Função para transformar as moedas em portfolioCoins e salvar no coreData
     func mapAllCoinsToPortfolioCoins(allCoins: [CoinModel], porfolioEntities: [PortfolioEntity]) -> [CoinModel]{
