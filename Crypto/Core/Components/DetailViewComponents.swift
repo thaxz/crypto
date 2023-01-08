@@ -48,7 +48,15 @@ extension DetailView {
         }
     }
     
-    
+    var navBarTrailingItem: some View {
+        HStack {
+            Text(detailViewModel.coin.symbol.uppercased())
+                .font(.headline)
+            .foregroundColor(Color.theme.secondaryText)
+            CoinImageView(coin: detailViewModel.coin)
+                .frame(width: 25, height: 25)
+        }
+    }
     
     
     

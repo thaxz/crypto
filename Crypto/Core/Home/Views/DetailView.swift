@@ -40,9 +40,8 @@ struct DetailView: View {
     var body: some View {
         ScrollView(showsIndicators: false){
             VStack(spacing: 20){
-                Text("")
-                    .frame(height: 150)
-                
+                ChartView(coin: detailViewModel.coin)
+                    .padding(.vertical)
                 overviewTitle
                 Divider()
                 overviewGrid
@@ -54,6 +53,11 @@ struct DetailView: View {
             .padding()
         }
         .navigationTitle(detailViewModel.coin.name)
+        .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing) {
+                navBarTrailingItem
+            }
+        }
     }
 }
 
