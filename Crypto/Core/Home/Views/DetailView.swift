@@ -24,20 +24,43 @@ struct DetailView: View {
     
     @StateObject var detailViewModel: DetailViewModel
     
+    let columns: [GridItem] = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
+    let spacing: CGFloat = 20
+    
     init(coin: CoinModel) {
         // como para inicializar a VM precisa de uma coin, e aqui a coin está sendo criada ao mesmo tempo
         // aqui estou inicializando a VM com a mesma coin do init
         _detailViewModel = StateObject(wrappedValue: DetailViewModel(coin: coin))
-        print("initializing detail view for \(coin.name)")
     }
     
     var body: some View {
-        Text("Hello")
+        ScrollView(showsIndicators: false){
+            VStack(spacing: 20){
+                Text("")
+                    .frame(height: 150)
+                
+                overviewTitle
+                Divider()
+                overviewGrid
+                
+                additionalTitle
+                Divider()
+                additionalGrid
+            }
+            .padding()
+        }
+        .navigationTitle(detailViewModel.coin.name)
     }
 }
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(coin: dev.coin)
+        NavigationView{
+            DetailView(coin: dev.coin)
+        }
     }
 }
