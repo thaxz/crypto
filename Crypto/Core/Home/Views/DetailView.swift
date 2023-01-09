@@ -23,6 +23,7 @@ struct DetailLoadingView: View{
 struct DetailView: View {
     
     @StateObject var detailViewModel: DetailViewModel
+    @State var showFullDescription: Bool = false
     
     let columns: [GridItem] = [
         GridItem(.flexible()),
@@ -42,15 +43,20 @@ struct DetailView: View {
             VStack(spacing: 20){
                 ChartView(coin: detailViewModel.coin)
                     .padding(.vertical)
-                overviewTitle
-                Divider()
-                overviewGrid
                 
-                additionalTitle
-                Divider()
-                additionalGrid
+                VStack(spacing: 20){
+                    overviewTitle
+                    Divider()
+                    descriptionSection
+                    overviewGrid
+                    additionalTitle
+                    Divider()
+                    additionalGrid
+                    websiteSection
+                    
+                }
+                .padding()
             }
-            .padding()
         }
         .navigationTitle(detailViewModel.coin.name)
         .toolbar{
