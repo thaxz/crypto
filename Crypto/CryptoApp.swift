@@ -12,6 +12,8 @@ struct CryptoApp: App {
     
     // Para acessar de qualquer lugar
     @StateObject private var homeViewModel = HomeViewModel()
+    // Para dar dismiss na launchView
+    @State private var showLaunchView: Bool = true
     
     // colocando cor customizada nos navigationTitles
     init(){
@@ -21,12 +23,22 @@ struct CryptoApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                HomeView()
-                    .navigationBarHidden(true)
+            ZStack {
+                NavigationView {
+                    HomeView()
+                        .navigationBarHidden(true)
+                }
+                // todas as children dessa navigation poderão acessar
+                .environmentObject(homeViewModel)
+                
+                ZStack{
+                    if showLaunchView {
+                        // launchscreen fake
+                        LaunchView(showLaunchView: $showLaunchView)
+                            .transition(.move(edge: .leading))
+                    }
+                } .zIndex(2)
             }
-            // todas as children dessa navigation poderão acessar
-            .environmentObject(homeViewModel)
         }
     }
 }
