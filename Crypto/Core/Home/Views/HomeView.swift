@@ -11,8 +11,9 @@ struct HomeView: View {
     
     // ir para a página de portfólio (animar p/ o lado)
     @State var showPortfolio: Bool = false
-    // quando a view de portfolio vai aparecer (nova sheet)
+    // novas sheets aparecendo
     @State var showPortfolioView: Bool = false
+    @State var showSettingsView: Bool = false
     // acessando a viewModel
     @EnvironmentObject var homeViewModel: HomeViewModel
     
@@ -49,6 +50,9 @@ struct HomeView: View {
                         .transition(.move(edge: .trailing))
                 }
                 Spacer(minLength: 0)
+            }
+            .sheet(isPresented: $showSettingsView) {
+                SettingsView()
             }
         }
         .background(

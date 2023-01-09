@@ -21,6 +21,8 @@ extension HomeView {
                     if showPortfolio {
                         // mudando o valor para aparecer a sheet
                         showPortfolioView.toggle()
+                    } else {
+                        showSettingsView.toggle()
                     }
                 }
                 .background(
