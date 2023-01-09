@@ -62,6 +62,7 @@ extension HomeView {
                     .onTapGesture {
                         segue(coin: coin)
                     }
+                    .listRowBackground(Color.theme.background)
             }
         }.listStyle(PlainListStyle())
     }
@@ -75,8 +76,17 @@ extension HomeView {
                     .onTapGesture {
                         segue(coin: coin)
                     }
+                    .listRowBackground(Color.theme.background)
             }
         }.listStyle(PlainListStyle())
+    }
+    
+    var portfolioEmptyText: some View {
+        Text("You haven't added any coins to your portfolio yet")
+            .font(.callout)
+            .fontWeight(.medium)
+            .foregroundColor(Color.theme.accent)
+            .padding(20)
     }
     // titles de cada coluna
     var columnTitles: some View {
@@ -129,14 +139,13 @@ extension HomeView {
                     homeViewModel.sortOption = homeViewModel.sortOption == .price ? .priceReversed : .price
                 }
             }
-            
             // botão para atualizar os dados
             Button {
                 withAnimation(.linear(duration: 2.0)){
                     homeViewModel.reloadData()
                 }
             } label: {
-                Image(systemName: "gofoward")
+                Image(systemName: "goforward")
             } .rotationEffect(Angle(degrees: homeViewModel.isLoading ? 360 : 0), anchor: .center)
         }
         .font(.caption)
