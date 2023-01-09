@@ -114,6 +114,101 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E976DAD6296C920B008819FE /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				E976DADC296C92BC008819FE /* ViewModels */,
+				E976DADB296C92AA008819FE /* Components */,
+				E976DADA296C929B008819FE /* Views */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		E976DAD7296C9221008819FE /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				E976DAD9296C9285008819FE /* Components */,
+				E976DAD8296C9278008819FE /* Views */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		E976DAD8296C9278008819FE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E976DAD0296C82A0008819FE /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E976DAD9296C9285008819FE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E976DAD2296C8AD2008819FE /* SettingsViewComponents.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E976DADA296C929B008819FE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E9710E032969E14000B371DE /* DetailView.swift */,
+				E9015DC1296B297000CC7DFC /* ChartView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E976DADB296C92AA008819FE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E9763E53296B10C00012C232 /* DetailViewComponents.swift */,
+				E976DAD4296C8B46008819FE /* ChartViewComponents.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E976DADC296C92BC008819FE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				E9749EC92969EFAD000D285C /* DetailViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E976DADD296C9312008819FE /* Portfolio */ = {
+			isa = PBXGroup;
+			children = (
+				E976DADF296C9322008819FE /* Components */,
+				E976DADE296C931D008819FE /* Views */,
+			);
+			path = Portfolio;
+			sourceTree = "<group>";
+		};
+		E976DADE296C931D008819FE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E940DA7E2968860000D95136 /* PortfolioView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E976DADF296C9322008819FE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E940DA8429689B0200D95136 /* PortfolioViewComponents.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E976DAE0296C934D008819FE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E97CD1702963AABC00764A71 /* CoinRowComponents.swift */,
+				E97CD165296381C700764A71 /* HomeViewComponents.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		E97CD13A296372D200764A71 = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +265,9 @@
 			isa = PBXGroup;
 			children = (
 				E97CD15D29637A1D00764A71 /* Components */,
+				E976DADD296C9312008819FE /* Portfolio */,
+				E976DAD6296C920B008819FE /* Detail */,
+				E976DAD7296C9221008819FE /* Settings */,
 				E97CD158296378CD00764A71 /* Home */,
 			);
 			path = Core;
@@ -178,6 +276,7 @@
 		E97CD158296378CD00764A71 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				E976DAE0296C934D008819FE /* Components */,
 				E97CD15A296378E100764A71 /* ViewModels */,
 				E97CD159296378DB00764A71 /* Views */,
 			);
@@ -187,14 +286,9 @@
 		E97CD159296378DB00764A71 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E9A564512965FB3B007B3859 /* CoinImageView.swift */,
 				E97CD15B296378F600764A71 /* HomeView.swift */,
 				E97CD16A2963972F00764A71 /* CoinRowView.swift */,
 				E925C06E29663D0D0018028B /* HomeStatsView.swift */,
-				E940DA7E2968860000D95136 /* PortfolioView.swift */,
-				E9710E032969E14000B371DE /* DetailView.swift */,
-				E9015DC1296B297000CC7DFC /* ChartView.swift */,
-				E976DAD0296C82A0008819FE /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -204,7 +298,6 @@
 			children = (
 				E97CD1722963B20500764A71 /* HomeViewModel.swift */,
 				E9A564552965FEDA007B3859 /* CoinImageViewModel.swift */,
-				E9749EC92969EFAD000D285C /* DetailViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -213,16 +306,11 @@
 			isa = PBXGroup;
 			children = (
 				E97CD15E29637A2800764A71 /* CircleButton */,
-				E97CD1702963AABC00764A71 /* CoinRowComponents.swift */,
-				E97CD165296381C700764A71 /* HomeViewComponents.swift */,
 				E9BF8FAD29661ECC005BF427 /* SearchBarView.swift */,
+				E9A564512965FB3B007B3859 /* CoinImageView.swift */,
 				E925C06C296639930018028B /* StatisticView.swift */,
 				E940DA80296888BC00D95136 /* XMarkButton.swift */,
 				E940DA822968985500D95136 /* CoinLogoView.swift */,
-				E940DA8429689B0200D95136 /* PortfolioViewComponents.swift */,
-				E9763E53296B10C00012C232 /* DetailViewComponents.swift */,
-				E976DAD2296C8AD2008819FE /* SettingsViewComponents.swift */,
-				E976DAD4296C8B46008819FE /* ChartViewComponents.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
