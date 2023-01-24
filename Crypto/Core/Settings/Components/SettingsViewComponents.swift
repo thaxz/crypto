@@ -13,7 +13,7 @@ extension SettingsView{
     var courseSection: some View {
         Section {
             HStack( spacing: 20) {
-                Text("This conforms to MVVM Architecture, using Combine and CoreDara. It uses SwiftUI and is written 100% in Swift. The project benefits from multi-threading, publihsers/subscribers, and data persistance.")
+                Text("This app conforms to MVVM Architecture, using Combine and CoreDara. It uses SwiftUI and is written 100% in Swift. The project benefits from multi-threading, publihsers/subscribers, and data persistance.")
                     .font(.callout)
                     .foregroundColor(Color.theme.accent)
                 
